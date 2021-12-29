@@ -30,7 +30,7 @@ const socketController = async( socket = new Socket(), io ) => { //Work either o
 
     socket.on('enviar-mensaje', ({ uid, mensaje }) => { // Socket to listen on 'enviar-mensaje' event
         
-        if ( uid ) {
+        if ( uid ) { // It's for private rooms === private messages
             // Mensaje privado
             socket.to( uid ).emit( 'mensaje-privado', { de: usuario.nombre, mensaje }); // .to(room) -- Set a modifier for a room --
         } else {

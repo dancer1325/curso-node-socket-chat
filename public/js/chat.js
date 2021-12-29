@@ -37,7 +37,7 @@ const validarJWT = async() => {
     
 }
 
-const conectarSocket = async() => {
+const conectarSocket = async() => { // When a new client connects to --> it will be executed
     
     socket = io({ // Initialize the client socket with extraheaders
         'extraHeaders': { // In the server side it will appear in the socket.handshake.headers
@@ -108,7 +108,7 @@ txtMensaje.addEventListener('keyup', ({ keyCode }) => { // Add event listener to
     const mensaje = txtMensaje.value;
     const uid     = txtUid.value;
 
-    if( keyCode !== 13 ){ return; }
+    if( keyCode !== 13 ){ return; } // KeyCode=13 === Press enter button
     if( mensaje.length === 0 ){ return; }
 
     socket.emit('enviar-mensaje', { mensaje, uid }); // Emit events
@@ -129,7 +129,7 @@ btnSalir.addEventListener('click', ()=> { // Add event listener to the "btnSalir
     });
 });
 
-// Testing purposes
+
 const main = async() => { //TODO: Why this main?
     // Validar JWT
     await validarJWT();
@@ -142,6 +142,6 @@ const main = async() => { //TODO: Why this main?
     });
 })();
 
-
+// Not necessary to invoke manually
 // main();
 

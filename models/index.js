@@ -8,7 +8,7 @@ const Server   = require('./server');
 const Usuario  = require('./usuario');
 
 
-
+// Export all the models
 module.exports = {
     Categoria,
     ChatMensajes,

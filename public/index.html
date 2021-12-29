@@ -17,9 +17,9 @@
             <h1>Google Signin</h1>
             <hr>
             <br>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div> <!-- Function is exported from the auth.js TODO: data-onsuccess?-->
             <br>
-            <a href="#" onclick="signOut();">Sign out</a>
+            <a href="#" onclick="signOut();">Sign out</a>  <!-- Function is exported from the auth.js -->
         </div>
 
         <div class="col-sm-6">
@@ -42,7 +42,8 @@
 
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="./js/auth.js"></script>
+    <script src="./js/auth.js"></script> <!-- Import the auth.js. Since it's in the same localhost -- Use "./" -->
+    <!-- Since this .html doesn't manage sockets -- Not add the path created automatically by the socket server -->
 
 </body>
 </html>

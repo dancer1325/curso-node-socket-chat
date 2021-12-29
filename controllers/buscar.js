@@ -15,16 +15,16 @@ const buscarUsuarios = async( termino = '', res = response ) => {
     const esMongoID = ObjectId.isValid( termino ); // TRUE 
 
     if ( esMongoID ) {
-        const usuario = await Usuario.findById(termino);
+        const usuario = await Usuario.findById(termino); // Existing default method in all models
         return res.json({
             results: ( usuario ) ? [ usuario ] : []
         });
     }
 
-    const regex = new RegExp( termino, 'i' );
-    const usuarios = await Usuario.find({
-        $or: [{ nombre: regex }, { correo: regex }],
-        $and: [{ estado: true }]
+    const regex = new RegExp( termino, 'i' ); // 'i' flag in the pattern, to make a case-insensitive search === No case sensitive
+    const usuarios = await Usuario.find({ // Existing default method in all models
+        $or: [{ nombre: regex }, { correo: regex }], // Separated by ',' the or queries
+        $and: [{ estado: true }] // Separated by  ',' the and queries
     });
 
     res.json({
@@ -38,14 +38,14 @@ const buscarCategorias = async( termino = '', res = response ) => {
     const esMongoID = ObjectId.isValid( termino ); // TRUE 
 
     if ( esMongoID ) {
-        const categoria = await Categoria.findById(termino);
+        const categoria = await Categoria.findById(termino); // Existing default method in all models
         return res.json({
             results: ( categoria ) ? [ categoria ] : []
         });
     }
 
-    const regex = new RegExp( termino, 'i' );
-    const categorias = await Categoria.find({ nombre: regex, estado: true });
+    const regex = new RegExp( termino, 'i' ); // 'i' flag in the pattern, to make a case-insensitive search === No case sensitive
+    const categorias = await Categoria.find({ nombre: regex, estado: true }); // Existing default method in all models
 
     res.json({
         results: categorias
@@ -58,16 +58,16 @@ const buscarProductos = async( termino = '', res = response ) => {
     const esMongoID = ObjectId.isValid( termino ); // TRUE 
 
     if ( esMongoID ) {
-        const producto = await Producto.findById(termino)
-                            .populate('categoria','nombre');
+        const producto = await Producto.findById(termino) // Existing default method in all models
+                            .populate('categoria','nombre'); // Adding fields to return for linked documents
         return res.json({
             results: ( producto ) ? [ producto ] : []
         });
     }
 
-    const regex = new RegExp( termino, 'i' );
-    const productos = await Producto.find({ nombre: regex, estado: true })
-                            .populate('categoria','nombre')
+    const regex = new RegExp( termino, 'i' ); // 'i' flag in the pattern, to make a case-insensitive search === No case sensitive
+    const productos = await Producto.find({ nombre: regex, estado: true }) // Existing default method in all models
+                            .populate('categoria','nombre') // Adding fields to return for linked documents
 
     res.json({
         results: productos
@@ -78,7 +78,7 @@ const buscarProductos = async( termino = '', res = response ) => {
 
 const buscar = ( req, res = response ) => {
     
-    const { coleccion, termino  } = req.params;
+    const { coleccion, termino  } = req.params; // Get the path params indicated in the request with ":"
 
     if ( !coleccionesPermitidas.includes( coleccion ) ) {
         return res.status(400).json({

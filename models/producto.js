@@ -4,7 +4,7 @@ const ProductoSchema = Schema({
     nombre: {
         type: String,
         required: [true, 'El nombre es obligatorio'],
-        unique: true
+        unique: true // Indicate that this property is an index
     },
     estado: {
         type: Boolean,
@@ -12,8 +12,8 @@ const ProductoSchema = Schema({
         required: true
     },
     usuario: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario',
+        type: Schema.Types.ObjectId, // Link to another schema
+        ref: 'Usuario', // Reference must match with the name of the model
         required: true
     },
     precio: {
@@ -21,8 +21,8 @@ const ProductoSchema = Schema({
         default: 0
     },
     categoria: {
-        type: Schema.Types.ObjectId,
-        ref: 'Categoria',
+        type: Schema.Types.ObjectId, // Link to another schema
+        ref: 'Categoria', // Reference must match with the name of the model
         required: true
     },
     descripcion: { type: String },
@@ -31,9 +31,11 @@ const ProductoSchema = Schema({
 });
 
 
-ProductoSchema.methods.toJSON = function() {
-    const { __v, estado, ...data  } = this.toObject();
-    return data;
+ProductoSchema.methods.toJSON = function() { // Add functionality to the schemas, overriding toJSON method
+    const { __v, estado, ...data  } = this.toObject(); // "this" only works in "normal" functions, not in "arrow" functions
+    // this.toObject returns the literal javascript object
+    // Destructuring to take out __v and estado, outside the rest
+    return data; // --> It won't return neither __v nor estado
 }
 
 

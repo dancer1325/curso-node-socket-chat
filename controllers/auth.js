@@ -14,7 +14,7 @@ const login = async(req, res = response) => {
     try {
       
         // Verificar si el email existe
-        const usuario = await Usuario.findOne({ correo });
+        const usuario = await Usuario.findOne({ correo }); // Existing default method in all models
         if ( !usuario ) {
             return res.status(400).json({
                 msg: 'Usuario / Password no son correctos - correo'
@@ -29,7 +29,7 @@ const login = async(req, res = response) => {
         }
 
         // Verificar la contraseña
-        const validPassword = bcryptjs.compareSync( password, usuario.password );
+        const validPassword = bcryptjs.compareSync( password, usuario.password ); // Check the password for sync encryption
         if ( !validPassword ) {
             return res.status(400).json({
                 msg: 'Usuario / Password no son correctos - password'
@@ -40,6 +40,7 @@ const login = async(req, res = response) => {
         const token = await generarJWT( usuario.id );
 
         res.json({
+            // Body converted to a Json string
             usuario,
             token
         })
@@ -61,7 +62,7 @@ const googleSignin = async(req, res = response) => {
     try {
         const { correo, nombre, img } = await googleVerify( id_token );
 
-        let usuario = await Usuario.findOne({ correo });
+        let usuario = await Usuario.findOne({ correo }); // Existing default method in all models. Identify in our database based on the email
 
         if ( !usuario ) {
             // Tengo que crearlo
@@ -74,7 +75,7 @@ const googleSignin = async(req, res = response) => {
             };
 
             usuario = new Usuario( data );
-            await usuario.save();
+            await usuario.save(); // Existing default method in all models
         }
 
         // Si el usuario en DB
@@ -88,6 +89,7 @@ const googleSignin = async(req, res = response) => {
         const token = await generarJWT( usuario.id );
         
         res.json({
+            // Body converted to a Json string
             usuario,
             token
         });
@@ -107,7 +109,7 @@ const googleSignin = async(req, res = response) => {
 
 const renovarToken = async( req, res = response ) =>{
 
-    const { usuario } = req;
+    const { usuario } = req; // It's the whole request object. But usuario has been added in the middleware function
 
     // Generar el JWT
     const token = await generarJWT( usuario.id );

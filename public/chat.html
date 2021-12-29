@@ -16,21 +16,21 @@
 
         <div class="col-sm-6">
             <h3>Enviar mensaje</h3>
-            <hr>
+            <hr> <!-- Horizontal rule to separate content -->
             <input type="text"
                    id="txtUid"
                    class="form-control mb-2"
                    placeholder="uid"
-                   autocomplete="off">
+                   autocomplete="off">  <!-- Not to show suggestions -->
 
             <input type="text"
                    id="txtMensaje"
                    class="form-control mb-2"
                    placeholder="Mensaje"
-                   autocomplete="off">
+                   autocomplete="off"> <!-- Not to show suggestions -->
 
             <h3>Usuarios</h3>
-            <hr>
+            <hr> <!-- Horizontal rule to separate content -->
             <ul id="ulUsuarios">
 
             </ul>
@@ -57,7 +57,7 @@
 
 
     <script src="https://apis.google.com/js/platform.js"></script>
-    <script src="./socket.io/socket.io.js"></script>
-    <script src="./js/chat.js"></script>
+    <script src="./socket.io/socket.io.js"></script> <!-- Path created automatically by the socket server. Since it's in the same localhost -- Use "./" -->
+    <script src="./js/chat.js"></script> <!-- Import the chat.js. Since it's in the same localhost -- Use "./" -->
 </body>
 </html>

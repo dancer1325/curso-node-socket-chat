@@ -35,7 +35,7 @@ const validarJWT = async( req = request, res = response, next ) => {
         }
         
         
-        req.usuario = usuario;
+        req.usuario = usuario; // Add to the request the usuario object found from database
         next();
 
     } catch (error) {

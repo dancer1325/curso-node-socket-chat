@@ -1,3 +1,4 @@
+// Private class, just used in ChateMensajes --> Not necessary to export it
 class Mensaje {
     constructor( uid, nombre, mensaje ) {
         this.uid     = uid;
@@ -6,7 +7,7 @@ class Mensaje {
     }
 }
 
-
+// Class to control all the messages
 class ChatMensajes {
 
     constructor() {
@@ -15,7 +16,7 @@ class ChatMensajes {
     }
 
     get ultimos10() {
-        this.mensajes = this.mensajes.splice(0,10);
+        this.mensajes = this.mensajes.splice(0,10); // Remove and return the first 10 elements
         return this.mensajes;
     }
 
@@ -24,7 +25,7 @@ class ChatMensajes {
     }
 
     enviarMensaje( uid, nombre, mensaje ) {
-        this.mensajes.unshift(
+        this.mensajes.unshift( // Insert new element at the start of the array
             new Mensaje(uid, nombre, mensaje)
         );
     }
